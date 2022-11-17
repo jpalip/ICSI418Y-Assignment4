@@ -57,7 +57,7 @@ const { MongoClient } = require("mongodb");
 //const url = "mongodb://mongo:27017/";
 //mongodb://myuser:mypassword@mongo:27017/";
 const url =
-  process.env.HOSTNAME +
+  process.env.NAME_OF_HOST +
   "://" +
   process.env.DBUSERNAME +
   ":" +
@@ -70,7 +70,7 @@ console.log(url);
 // Example: console.log(process.env.NODE_ENV);
 //console.log(process.env.DBNAME);
 
-const dbName = process.env.dbName;
+const dbName = process.env.DBNAME;
 const client = new MongoClient(url);
 
 app.get("/db", async function (req, res, next) {

@@ -25,7 +25,7 @@ services:
       - DB_USER=myuser
       - DB_PASSWORD=mypassword
       - DB_NAME=mydb
-      - MONGODB_URL = mongodb://myuser:mypassword@mydb:27017/
+      - MONGODB_URL=mongodb://myuser:mypassword@mydb:27017/
     stdin_open: true
     tty: true
 
