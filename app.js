@@ -1,5 +1,11 @@
 const express = require("express");
 const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const createError = require("http-errors");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const app = express();
 const PORT = 3000;
@@ -7,25 +13,32 @@ const PORT = 3000;
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "./public")));
 
 let harry = {
   name: "Harry Potter",
-  house: "Gryffindor",
+  bio: "I am a wizard",
+  img: "https://upload.wikimedia.org/wikipedia/en/d/d7/Harry_Potter_character_poster.jpg",
 };
 let remus = {
   name: "Remus Lupin",
-  house: "Gryffindor",
+  bio: "I am a werewolf",
+  img: "https://i.pinimg.com/originals/0d/0e/2b/0d0e2b8b4b8b8b8b8b8b8b8b8b8b8b8b.jpg",
 };
 let salazar = {
   name: "Salazar Slytherin",
-  house: "Slytherin",
+  bio: "I am a snake",
+  img: "https://i.pinimg.com/originals/0d/0e/2b/0d0e2b8b4b8b8b8b8b8b8b8b8b8b8b8b.jpg",
 };
 
 let wizards = [harry, remus, salazar];
 
-app.get("/", function (req, res) {
-  res.render("index");
+app.get("/", (req, res, next) => {
+  res.render("index", { wizards: wizards });
 });
 
 app.listen(PORT, (error) => {
@@ -41,12 +54,23 @@ app.listen(PORT, (error) => {
 // *****************************************************************************
 const { MongoClient } = require("mongodb");
 
-const url = "mongodb://mongo:27017/";
-//const url = 'mongodb://myuser:mypassword@mongo:27017/';
+//const url = "mongodb://mongo:27017/";
+//mongodb://myuser:mypassword@mongo:27017/";
+const url =
+  process.env.HOSTNAME +
+  "://" +
+  process.env.DBUSERNAME +
+  ":" +
+  process.env.DBPASSWORD +
+  "@" +
+  process.env.DBNAME +
+  ":27017/";
+console.log(url);
 //  GET THE HOSTNAME, username & password & the DB name from environment vars.
 // Example: console.log(process.env.NODE_ENV);
+//console.log(process.env.DBNAME);
 
-const dbName = "magicWorld";
+const dbName = process.env.dbName;
 const client = new MongoClient(url);
 
 app.get("/db", async function (req, res, next) {

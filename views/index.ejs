@@ -35,27 +35,15 @@
         </div>
       </div>
     </nav>
+    <h1>All Wizards</h1>
     <div class="row">
-        <% wizards.forEach(function(wizard){ %>
-            <li>
-              
-              <%= wizard.name %>
-    
-              
-              <% if (wizard.house == "Gryffindor") { %>
-               <span style="color:red"> <%= " house: " + wizard.house %></span>
-              
-              <% } else { %>
-                <span style="color:green"> <%= " house: " + wizard.house %></span>
-               <% } %> 
-            
-            
-            </li>
-    
-          <% }); %>
-      <div class="card col-sm">{user.imageURL}</div>
-      <div class="card col-sm">{user.fullName}</div>
-      <div class="card col-sm">{user.fullBio}</div>
-    </div>
+      <% wizards.forEach(function(wizard){ %>
+          
+        <div class="card col-sm"><%= wizard.name %>      
+            <span style="color:red"> <%= " Bio: " + wizard.bio %></span>
+            <img src=<%= wizard.img %> alt=""/>
+        </div>
+        
+      <% }); %>
   </body>
 </html>
