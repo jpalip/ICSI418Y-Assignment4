@@ -31,17 +31,22 @@
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
           </ul>
-          </form>
+        </div>
         </div>
       </div>
     </nav>
     <h1>All Wizards</h1>
-    <div class="row">
-      <% wizards.forEach(function(wizard){ %>
-          
-        <div class="card col-sm"><%= wizard.name %>      
+      <% wizards.forEach(function(wizard){ %> 
+        <div class="row">
+          <div class="card col-sm">
+            <%= wizard.name %>
+          </div>
+          <div class="card col-sm">
             <span style="color:red"> <%= " Bio: " + wizard.bio %></span>
-            <img src=<%= wizard.img %> alt=""/>
+          </div>
+          <div class="card col-sm">
+            <img src=<%= wizard.img %> alt="" style="height:200px;width:200px" />
+          </div>
         </div>
         
       <% }); %>

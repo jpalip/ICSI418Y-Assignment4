@@ -3,31 +3,31 @@ version: "3.8"
 services:
   mongo:
     container_name: mongo
-    image: mongo:5
-    restart: unless-stopped
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=myuser
-      - MONGO_INITDB_ROOT_PASSWORD=mypassword
-    ports:
-      - 27017:27017
-    volumes:
-      - db:/data/db
+    image: mongo
+    restart: always
+    # ports:
+    #   - 27017:27017
   app:
     container_name: app
     depends_on:
       - mongo
     build: ./
     restart: unless-stopped
-    ports:
-      - 3000:3000
-    environment:
-      - DB_HOST=mongo
-      - DB_USER=myuser
-      - DB_PASSWORD=mypassword
-      - DB_NAME=mydb
-      - MONGODB_URL=mongodb://myuser:mypassword@mydb:27017/
+    # ports:
+    #   - 3000:3000
     stdin_open: true
     tty: true
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
 
 volumes:
   db:
+  caddy_data:
+  caddy_config:

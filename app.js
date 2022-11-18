@@ -27,12 +27,12 @@ let harry = {
 let remus = {
   name: "Remus Lupin",
   bio: "I am a werewolf",
-  img: "https://i.pinimg.com/originals/0d/0e/2b/0d0e2b8b4b8b8b8b8b8b8b8b8b8b8b8b.jpg",
+  img: "https://upload.wikimedia.org/wikipedia/en/2/2f/Remus_Lupin.jpeg",
 };
 let salazar = {
   name: "Salazar Slytherin",
   bio: "I am a snake",
-  img: "https://i.pinimg.com/originals/0d/0e/2b/0d0e2b8b4b8b8b8b8b8b8b8b8b8b8b8b.jpg",
+  img: "https://gamepress.gg/wizardsunite/sites/wizardsunite/files/2019-08/Portrait%20of%20Salazar%20Slytherin-foundable.png",
 };
 
 let wizards = [harry, remus, salazar];
@@ -56,15 +56,16 @@ const { MongoClient } = require("mongodb");
 
 //const url = "mongodb://mongo:27017/";
 //mongodb://myuser:mypassword@mongo:27017/";
-const url =
-  process.env.NAME_OF_HOST +
-  "://" +
-  process.env.DBUSERNAME +
-  ":" +
-  process.env.DBPASSWORD +
-  "@" +
-  process.env.DBNAME +
-  ":27017/";
+const url = process.env.NAME_OF_HOST + "://" + process.env.DBNAME + ":27017/";
+//"mongodb://mongo:27017/"; // THIS URI WORKS !!!!!!
+// process.env.NAME_OF_HOST +
+// "://" +
+// process.env.DBUSERNAME +
+// ":" +
+// process.env.DBPASSWORD +
+// "@" +
+// process.env.DBNAME +
+// ":27017/";
 console.log(url);
 //  GET THE HOSTNAME, username & password & the DB name from environment vars.
 // Example: console.log(process.env.NODE_ENV);
